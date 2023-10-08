@@ -2,9 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ${{values.project_name}}
-  namespace: dev
-  annotations:
-    backstage.io/kubernetes-id: ${{values.component_id | dump}}
+  namespace: ${{values.project_k8_namespace}}
 spec:
   selector:
     app: ${{values.project_name}}

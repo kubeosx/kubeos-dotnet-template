@@ -15,16 +15,17 @@ spec:
   type: service
 
   parameters:
-    - title: Provide some simple information
+    - title: Dotnet Solution/Project details
       required:
         - component_id # solution name
+        - project_name
         - owner
         - project_name
       properties:
         component_id:
           title: Name
           type: string
-          description: Unique name of the component - Dotnet Solution file name
+          description: Unique name of the component - will be used for Dotnet Solution file name
           ui:field: EntityNamePicker
           maxLength: 50
           pattern: '^[a-z0-9]+$'
@@ -46,7 +47,7 @@ spec:
           description: Name of the project
           maxLength: 50
           pattern: '^[a-z0-9]+$'
-    - title: Choose a location
+    - title: Repository details
       required:
         - repoUrl
       properties:
@@ -88,6 +89,7 @@ spec:
           owner: ${{ parameters.owner }}
           destination: ${{ parameters.repoUrl | parseRepoUrl }}
           docker_username: ${{ parameters.docker_username }}
+          project_k8_namespace: ${{ parameters.project_name }}
           http_port: 8080
 
     - id: publish
