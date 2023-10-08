@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${{values.project_name}}
+  namespace: dev
+  labels:
+    backstage.io/kubernetes-id: ${{values.component_id | dump}}
+  annotations:
+    backstage.io/kubernetes-id: ${{values.component_id | dump}}
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ${{values.project_name}}
+  template:
+    metadata:
+      labels:
+        app: ${{values.project_name}}
+        backstage.io/kubernetes-id: ${{values.component_id | dump}}
+      annotations:
+        backstage.io/kubernetes-id: ${{values.component_id | dump}}
+    spec:
+      containers:
+        - name: my-${{values.project_name}}
+          image: ${{values.docker_username}}/${{values.project_name}}:1
+          ports:
+            - containerPort: 80

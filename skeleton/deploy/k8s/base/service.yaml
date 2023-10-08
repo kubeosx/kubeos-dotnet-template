@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${{values.project_name}}
+  namespace: dev
+  annotations:
+    backstage.io/kubernetes-id: ${{values.component_id | dump}}
+spec:
+  selector:
+    app: ${{values.project_name}}
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
