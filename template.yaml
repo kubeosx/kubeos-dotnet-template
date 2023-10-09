@@ -15,7 +15,7 @@ spec:
   type: service
   dependsOn: ['component:kubeos', component:kubeos-cluster, component:kubeos-baseline]
   annotations:
-    github.com/project-slug: kubeosx/kubeos-dotnet template
+    github.com/project-slug: kubeosx/kubeos-dotnet-template
     backstage.io/techdocs-ref: dir:.
   parameters:
     - title: Dotnet Solution/Project details
