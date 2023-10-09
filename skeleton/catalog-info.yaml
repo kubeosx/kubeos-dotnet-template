@@ -11,6 +11,9 @@ metadata:
     backstage.io/kubernetes-id: ${{values.project_name | dump}}
     backstage.io/kubernetes-namespace: ${{ parameters.project_name | dump }}
     prometheus.io/alert: all
+  tags:
+    - dotnet
+    - webapi
 spec:
   type: service
   lifecycle: experimental
