@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: ${{values.project_name}}
   namespace: ${{values.project_k8_namespace}}
+  labels:
+    metrics-scraper: prometheus
 spec:
   selector:
     app: ${{values.project_name}}
