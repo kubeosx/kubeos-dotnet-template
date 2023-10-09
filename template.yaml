@@ -11,8 +11,9 @@ metadata:
     - docker
     - kubernetes
 spec:
-  owner: sourabh.rustagi@hotmail.com
+  owner: platform-engineering-team
   type: service
+  dependsOn: ['component:kubeos', component:kubeos-cluster]
 
   parameters:
     - title: Dotnet Solution/Project details
