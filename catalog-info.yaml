@@ -8,7 +8,7 @@ metadata:
     github.com/project-slug: kubeosx/kubeos-dotnet-template
     backstage.io/techdocs-ref: dir:.
 spec:
-  type: website
+  type: service
   owner: platform-engineering-team
   lifecycle: experimental
   dependsOn: ['component:kubeos', component:kubeos-cluster, component:kubeos-baseline]
