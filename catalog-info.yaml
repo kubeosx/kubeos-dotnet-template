@@ -11,4 +11,4 @@ spec:
   type: website
   owner: platform-engineering-team
   lifecycle: experimental
-  dependsOn: ['component:kubeos', component:kubeos-cluster]
+  dependsOn: ['component:kubeos', component:kubeos-cluster, component:kubeos-baseline]
