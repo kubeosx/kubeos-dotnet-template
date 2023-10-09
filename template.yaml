@@ -91,7 +91,10 @@ spec:
           owner: ${{ parameters.owner }}
           destination: ${{ parameters.repoUrl | parseRepoUrl }}
           docker_username: ${{ parameters.docker_username }}
-          project_k8_namespace: dev
+          project_k8_namespace: dev # ket default for this template as a standard to become
+          kustomize_path : ./deploy/k8s/overlays/dev # kepr default for this template as a standar to become
+          project_org : kubeosx # kept default for this template
+          repo_branch: main # kept default for this template
           http_port: 8080
 
     - id: publish
