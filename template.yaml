@@ -10,6 +10,7 @@ metadata:
     - github
     - docker
     - kubernetes
+  system: kubeos-idp
 spec:
   owner: platform-engineering-team
   type: service
