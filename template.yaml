@@ -23,7 +23,6 @@ spec:
         - component_id # solution name
         - project_name
         - owner
-        - project_name
       properties:
         component_id:
           title: Name
