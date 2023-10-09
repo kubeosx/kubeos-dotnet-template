@@ -9,7 +9,7 @@ metadata:
     github.com/project-slug: ${{values.destination.owner + "/" + values.destination.repo}}
     backstage.io/techdocs-ref: dir:.
     backstage.io/kubernetes-id: ${{values.project_name | dump}}
-    backstage.io/kubernetes-namespace: ${{ values.project_name | dump }}
+    backstage.io/kubernetes-namespace: ${{values.project_k8_namespace | dump}}
     prometheus.io/alert: all
   tags:
     - dotnet
