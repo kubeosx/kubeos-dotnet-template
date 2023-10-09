@@ -144,7 +144,7 @@ spec:
       action: roadiehq:utils:fs:append
       input:
         path: kubeos/clusters/dev/kustomization.yaml
-        content: '  - ${{ parameters.project_name }}/${{ parameters.project_name }}.yaml'
+        content: '  - ${{ parameters.project_name }}/'
 
     # PR back the change
     - id: pr-repo
