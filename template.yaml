@@ -13,7 +13,7 @@ metadata:
 spec:
   owner: platform-engineering-team
   type: service
-  dependsOn: ['component:kubeos', component:kubeos-cluster]
+  dependsOn: ['component:kubeos', component:kubeos-cluster, component:kubeos-baseline]
 
   parameters:
     - title: Dotnet Solution/Project details
