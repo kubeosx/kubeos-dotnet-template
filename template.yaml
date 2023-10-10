@@ -44,6 +44,14 @@ spec:
           ui:options:
             allowedKinds:
               - Group
+        system:
+          title: System
+          type: string
+          description: System of the component
+          ui:field: SystemPicker
+          ui:options:
+            catalogFilter:
+              - kind: System
         project_name:
           title: Name
           type: string
