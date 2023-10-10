@@ -48,7 +48,7 @@ spec:
           title: System
           type: string
           description: System of the component
-          ui:field: SystemPicker
+          ui:field: EntityPicker
           ui:options:
             catalogFilter:
               - kind: System
