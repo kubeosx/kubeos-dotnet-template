@@ -98,6 +98,7 @@ spec:
           artifact_id: ${{ parameters.component_id }}
           project_name: ${{ parameters.project_name }}
           owner: ${{ parameters.owner }}
+          system: ${{ parameters.system }}
           destination: ${{ parameters.repoUrl | parseRepoUrl }}
           docker_username: ${{ parameters.docker_username }}
           project_k8_namespace: dev # ket default for this template as a standard to become
@@ -145,6 +146,7 @@ spec:
           artifact_id: ${{ parameters.component_id }}
           project_name: ${{ parameters.project_name }}
           owner: ${{ parameters.owner }}
+          system: ${{ parameters.system }}
           destination: ${{ parameters.repoUrl | parseRepoUrl }}
           docker_username: ${{ parameters.docker_username }}
           project_k8_namespace: dev # ket default for this template as a standard to become
