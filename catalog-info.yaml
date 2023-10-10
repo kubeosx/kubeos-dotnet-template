@@ -7,6 +7,9 @@ metadata:
   annotations:
     github.com/project-slug: kubeosx/kubeos-dotnet-template
     backstage.io/techdocs-ref: dir:.
+  tags:
+    - dotnet
+    - template
 spec:
   type: service
   owner: platform-engineering-team
