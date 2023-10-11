@@ -21,17 +21,22 @@ spec:
   parameters:
     - title: Dotnet Solution/Project details
       required:
-        - component_id # solution name
+        - otlp_url
         - project_name
         - owner
       properties:
-        component_id:
+        project_name:
           title: Name
           type: string
-          description: Unique name of the component - will be used for Dotnet Solution file name
-          ui:field: EntityNamePicker
+          description: Name of the project
           maxLength: 50
           pattern: '^[a-z0-9]+$'
+        otlp_url:
+          title: Name
+          type: string
+          description: URL of the oltp you want to use
+          maxLength: 50
+          pattern: '^(ftp|http|https):\/\/[^ "]+$'
         description:
           title: Description
           type: string
@@ -52,12 +57,7 @@ spec:
           ui:options:
             catalogFilter:
               - kind: System
-        project_name:
-          title: Name
-          type: string
-          description: Name of the project
-          maxLength: 50
-          pattern: '^[a-z0-9]+$'
+
     - title: Repository details
       required:
         - repoUrl
@@ -93,10 +93,9 @@ spec:
         copyWithoutRender:
           - .github/workflows/*
         values:
-          component_id: ${{ parameters.component_id }}
           description: ${{ parameters.description }}
-          artifact_id: ${{ parameters.component_id }}
           project_name: ${{ parameters.project_name }}
+          otlp_url: ${{ parameters.otlp_url }}
           owner: ${{ parameters.owner }}
           system: ${{ parameters.system }}
           destination: ${{ parameters.repoUrl | parseRepoUrl }}
@@ -112,7 +111,7 @@ spec:
       action: publish:github
       input:
         allowedHosts: ["github.com"]
-        description: This is ${{ parameters.component_id }}
+        description: This is ${{ parameters.project_name }}
         repoUrl: ${{ parameters.repoUrl }}
         defaultBranch: main
         repoVisibility: public
@@ -141,9 +140,7 @@ spec:
         path:
         targetPath: kubeos/clusters/dev
         values:
-          component_id: ${{ parameters.component_id }}
           description: ${{ parameters.description }}
-          artifact_id: ${{ parameters.component_id }}
           project_name: ${{ parameters.project_name }}
           owner: ${{ parameters.owner }}
           system: ${{ parameters.system }}
@@ -170,11 +167,11 @@ spec:
       action: publish:github:pull-request
       input:
         repoUrl: github.com?repo=kubeos-cluster&owner=kubeosx
-        description: This is commiting project ${{ parameters.component_id }} for deployment
-        branchName: feature/Onboarding-${{ parameters.component_id }}
+        description: This is commiting project ${{ parameters.project_name }} for deployment
+        branchName: feature/Onboarding-${{ parameters.project_name }}
         targetBranchName: main
         gitCommitMessage: Add New Deployment Config
-        title: PR for new app :${{ parameters.component_id }}
+        title: PR for new app :${{ parameters.project_name }}
         sourcePath: kubeos/clusters/dev
         targetPath: clusters/dev
 

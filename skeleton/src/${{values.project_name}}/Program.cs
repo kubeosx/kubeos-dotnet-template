@@ -7,6 +7,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddOpenTelemetry()
+        .WithTracing(builder => builder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("App"))
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation()
+            .AddConsoleExporter()
+            .AddOtlpExporter((option) => option.Endpoint = new Uri("${{values.otlp_url}}")))
+        .WithMetrics(builder => builder
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation()
+            .AddConsoleExporter()
+            .AddOtlpExporter((option) => option.Endpoint = new Uri("${{values.otlp_url}}")));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
