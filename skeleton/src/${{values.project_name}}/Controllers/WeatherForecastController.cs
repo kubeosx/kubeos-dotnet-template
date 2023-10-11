@@ -29,5 +29,14 @@ public class WeatherForecastController : ControllerBase
         })
         .ToArray();
     }
+
+    
+    [HttpGet("OutgoingHttp")]
+    public async Task OutgoingHttp([FromQuery]string url)
+    {
+        var client = new HttpClient();
+        var response = await client.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+    }
 }
 
