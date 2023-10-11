@@ -8,7 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddOpenTelemetry()
-        .WithTracing(builder => builder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("App"))
+        .WithTracing(builder => builder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("${{values.project_name}}"))
             .AddAspNetCoreInstrumentation()
             .AddHttpClientInstrumentation()
             .AddConsoleExporter()
