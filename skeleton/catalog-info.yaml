@@ -27,13 +27,13 @@ spec:
   owner: ${{values.owner | dump}}
   system:  ${{values.system | dump}}
   providesApis:
-    - "${{values.project_name | dump}}-api"
+    - "${{values.project_name}}-api"
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: ${{values.project_name | dump}}-api
-  description: The ${{values.project_name | dump}} API
+  name: ${{values.project_name}}-api
+  description: The ${{values.project_name}} API
   tags:
     - api
     - rest

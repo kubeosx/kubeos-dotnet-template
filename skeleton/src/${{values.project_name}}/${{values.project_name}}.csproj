@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Title>${{values.project_name}}</Title>
 		<Version>0.0.1</Version>
-		<Authors>${{values.owner | dump}}</Authors>
+		<Authors>${{values.owner}}</Authors>
 		<Description>${{values.project_name}} HTTP REST API</Description>
 		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/${{values.destination.owner}}/${{values.project_name}}</RepositoryUrl>

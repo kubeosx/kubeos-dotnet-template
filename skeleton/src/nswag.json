@@ -3,7 +3,7 @@
   "defaultVariables": "configuration=Debug",
   "documentGenerator": {
     "aspNetCoreToOpenApi": {
-      "project": "dotday/dotday.csproj",
+      "project": "${{values.project_name}}/${{values.project_name}}.csproj",
       "configuration": "$(configuration)",
       "useDocumentProvider": true,
       "documentName": "openapi",
