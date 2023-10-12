@@ -26,3 +26,31 @@ spec:
   lifecycle: experimental
   owner: ${{values.owner | dump}}
   system:  ${{values.system | dump}}
+  providesApis:
+    - "${{values.project_name | dump}}-api"
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: ${{values.project_name | dump}}-api
+  description: The dotapi API
+  tags:
+    - api
+    - rest
+  links:
+    - url: https://github.com/${{values.destination.owner}}/${{values.destination.repo}}
+      icon: web
+      title: Github
+    - url: https://github.com/${{values.destination.owner}}/${{values.destination.repo}}/issues
+      icon: web
+      title: Github Issues
+    - url: https://github.com/${{values.destination.owner}}/${{values.destination.repo}}/blob/main/src/openapi.json
+      title: API Spec
+      icon: code
+spec:
+  type: openapi
+  lifecycle: experimental
+  owner: ${{values.owner | dump}}
+  system:  ${{values.system | dump}}
+  definition:
+    $json: ./openapi.json
