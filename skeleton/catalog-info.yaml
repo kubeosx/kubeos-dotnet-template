@@ -33,7 +33,7 @@ apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: ${{values.project_name | dump}}-api
-  description: The dotapi API
+  description: The ${{values.project_name | dump}} API
   tags:
     - api
     - rest

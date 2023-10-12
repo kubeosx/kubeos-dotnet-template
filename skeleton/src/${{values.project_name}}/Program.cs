@@ -11,7 +11,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddOpenApiDocument(document =>
+            {
+                document.DocumentName = "openapi";
+                document.Title = "${{values.project_name}} Service";
+                document.Description = "HTTP REST API service for ${{values.project_name}}";
+                document.Version = "1.1.0";
+            });
 builder.Services.AddOpenTelemetry()
         .WithTracing(builder => builder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("${{values.project_name}}"))
             .AddAspNetCoreInstrumentation()
@@ -29,10 +35,19 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
+}
+    app.UseOpenApi(options =>
+    {
+        options.DocumentName = "openapi";
+        options.Path = "/openapi/v1/openapi.json";
+    });
+    app.UseSwaggerUi3(options =>
+    {
+        options.Path = "/openapi";
+        options.DocumentPath = "/openapi/v1/openapi.json";
+        options.DocExpansion = "list";
+    });
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

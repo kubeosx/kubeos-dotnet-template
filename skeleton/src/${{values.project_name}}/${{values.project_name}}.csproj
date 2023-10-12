@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <Title>${{values.project_name}}</Title>
-		<Version>0.1.1</Version>
-		<Authors>iamsourabh-in</Authors>
+		<Version>0.0.1</Version>
+		<Authors>${{values.owner | dump}}</Authors>
 		<Description>${{values.project_name}} HTTP REST API</Description>
 		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/${{values.destination.owner}}/${{values.project_name}}</RepositoryUrl>
@@ -16,17 +16,17 @@
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
-    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.6.0" />
-    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.6.0" />
-    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.6.0" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.5.1-beta.1" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.5.1-beta.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-  </ItemGroup>
-<ItemGroup>
-		<Content Include="CgSDK.x64_2015.dll" CopyToPublishDirectory="Always" />
+	<ItemGroup>
+		<PackageReference Include="NSwag.AspNetCore" Version="13.19.0" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
+		<PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.6.0" />
+		<PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.6.0" />
+		<PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.6.0" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.5.1-beta.1" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.5.1-beta.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+	</ItemGroup>
+	<ItemGroup>
 		<Content Remove="nswag.json" />
 	</ItemGroup>
 </Project>
