@@ -53,10 +53,9 @@ spec:
           type: array
           items:
             type: string
-            enum:
-            - production
-            - staging
-            - development
+            catalogFilter:
+              - API
+              - Components
           uniqueItems: true
           ui:widget: checkboxes
 
