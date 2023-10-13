@@ -37,27 +37,27 @@ spec:
         #   description: URL of the oltp you want to use
         #   maxLength: 50
         #   pattern: '^(ftp|http|https):\/\/[^ "]+$'
-        consumes-api:
-          title: Existing Apis this App wil consume
-          type: array
-          minItems: 0
-          ui:options:
-            addable: true
-            orderable: true
-            removable: true
-            catalogFilter:
-              - API
-              - Components
+        # consumes-api:
+        #   title: Existing Apis this App wil consume
+        #   type: array
+        #   minItems: 0
+        #   ui:options:
+        #     addable: true
+        #     orderable: true
+        #     removable: true
+        #     catalogFilter:
+        #       - API
+        #       - Components
         depends-on:
           title: Array with custom objects
           type: array
           items:
             type: string
-            catalogFilter:
-              - API
-              - Components
-          uniqueItems: true
-          ui:widget: checkboxes
+            ui:options:
+              catalogFilter:
+                - API
+                - Components
+
 
 
         uniqueItems: true
