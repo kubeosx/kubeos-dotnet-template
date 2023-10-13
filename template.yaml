@@ -43,7 +43,7 @@ spec:
           description: Owner of the component
           ui:field: OwnerPicker
           ui:options:
-            catalogFilter:
+            allowedKind:
               - Group
 
         system:
