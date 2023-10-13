@@ -31,41 +31,12 @@ spec:
           description: Name of the project
           maxLength: 50
           pattern: '^[a-z0-9]+$'
-        # otlp_url:
-        #   title: Name
-        #   type: string
-        #   description: URL of the oltp you want to use
-        #   maxLength: 50
-        #   pattern: '^(ftp|http|https):\/\/[^ "]+$'
-        # consumes-api:
-        #   title: Existing Apis this App wil consume
-        #   type: array
-        #   minItems: 0
-        #   ui:options:
-        #     addable: true
-        #     orderable: true
-        #     removable: true
-        #     catalogFilter:
-        #       - API
-        #       - Components
-        depends-on:
-          title: Array with custom objects
-          type: array
-          items:
-            type: string
-            ui:options:
-              catalogFilter:
-                - API
-                - Components
-
-
-
-        uniqueItems: true
-        ui:widget: checkboxes    
+ 
         description:
           title: Description
           type: string
           description: Help others understand what this web api is for.
+
         owner:
           title: Owner
           type: string
@@ -74,6 +45,7 @@ spec:
           ui:options:
             catalogFilter:
               - Group
+
         system:
           title: System
           type: string
@@ -94,6 +66,7 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
+
     - title: Provide Docker information
       required:
         - docker_username
@@ -104,6 +77,7 @@ spec:
           type: string
           description: Docker user name for login and will be pushed to hub.
           ui:field: EntityNamePicker
+
         docker_password:
           title: Password
           type: string
@@ -131,8 +105,8 @@ spec:
           repo_branch: main # kept default for this template
           http_port: 8080
 
-    - id: publish
-      name: Publish
+    - id: publishmain
+      name: Publish Main
       action: publish:github
       input:
         allowedHosts: ["github.com"]
@@ -141,13 +115,29 @@ spec:
         defaultBranch: main
         repoVisibility: public
         requireCodeOwnerReviews: false
-        protectDefaultBranch: false
-        protectEnforceAdmins: false
+        # protectDefaultBranch: false
+        # protectEnforceAdmins: false
         secrets:
           "DOCKER_USER": ${{ parameters.docker_username }}
           "DOCKER_PASSWORD" :  ${{ parameters.docker_password }}
           "AppName": ${{ parameters.project_name }}
 
+    - id: publishdev
+      name: Creating Dev Banch
+      action: publish:github
+      input:
+        allowedHosts: ["github.com"]
+        description: This is ${{ parameters.project_name }}
+        repoUrl: ${{ parameters.repoUrl }}
+        defaultBranch: dev
+        repoVisibility: public
+        requireCodeOwnerReviews: false
+        # protectDefaultBranch: false
+        # protectEnforceAdmins: false
+        secrets:
+          "DOCKER_USER": ${{ parameters.docker_username }}
+          "DOCKER_PASSWORD" :  ${{ parameters.docker_password }}
+          "AppName": ${{ parameters.project_name }}
 
     # Fetch Cloud CLuster Repo, Which is responsible to deploying using FLux
     - id: fetch-remote

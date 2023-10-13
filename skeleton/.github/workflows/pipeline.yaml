@@ -2,9 +2,9 @@ name: .NET > Build > Test > OpenApi > Docker
 
 on:
   push:
-    branches: [main, staging, develop]
-  pull_request:
-    branches: [main, develop]
+    branches: [dev] #main, staging,
+  # pull_request:
+  #   branches: [main, develop]
 
 jobs:
   build-test-net:
