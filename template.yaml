@@ -21,9 +21,10 @@ spec:
   parameters:
     - title: Dotnet Solution/Project details
       required:
-        - otlp_url
         - project_name
+        - description
         - owner
+        - system
       properties:
         project_name:
           title: Name
