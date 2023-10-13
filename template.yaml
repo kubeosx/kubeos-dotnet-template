@@ -31,12 +31,33 @@ spec:
           description: Name of the project
           maxLength: 50
           pattern: '^[a-z0-9]+$'
-        otlp_url:
-          title: Name
-          type: string
-          description: URL of the oltp you want to use
-          maxLength: 50
-          pattern: '^(ftp|http|https):\/\/[^ "]+$'
+        # otlp_url:
+        #   title: Name
+        #   type: string
+        #   description: URL of the oltp you want to use
+        #   maxLength: 50
+        #   pattern: '^(ftp|http|https):\/\/[^ "]+$'
+        consumes-api:
+          title: Existing Apis this App wil consume
+          type: array
+          minItems: 0
+          ui:options:
+            addable: true
+            orderable: true
+            removable: true
+            catalogFilter:
+              - API
+              - Components
+        depends-on:
+          title: Array with custom objects
+          type: array
+          minItems: 0
+          ui:options:
+            addable: true
+            orderable: true
+            removable: true
+            catalogFilter:
+              - API
         description:
           title: Description
           type: string
@@ -47,7 +68,7 @@ spec:
           description: Owner of the component
           ui:field: OwnerPicker
           ui:options:
-            allowedKinds:
+            catalogFilter:
               - Group
         system:
           title: System
@@ -95,7 +116,7 @@ spec:
         values:
           description: ${{ parameters.description }}
           project_name: ${{ parameters.project_name }}
-          otlp_url: ${{ parameters.otlp_url }}
+          otlp_url: "http://jaeger-collector.observability.svc:4317/"
           owner: ${{ parameters.owner }}
           system: ${{ parameters.system }}
           destination: ${{ parameters.repoUrl | parseRepoUrl }}
