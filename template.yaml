@@ -56,8 +56,25 @@ spec:
             addable: true
             orderable: true
             removable: true
-            catalogFilter:
-              - API
+        items:
+          type: object
+          properties:
+            array:
+              title: Array string with default value
+              type: string
+              default: value3
+              enum:
+                - value1
+                - value2
+                - value3
+            flag:
+              title: Boolean flag
+              type: boolean
+              ui:widget: radio
+            someInput:
+              title: Simple text input
+              type: string
+              
         description:
           title: Description
           type: string
