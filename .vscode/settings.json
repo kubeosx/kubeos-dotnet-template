@@ -1,5 +1,6 @@
 {
     "yaml.schemas": {
-        "https://json.schemastore.org/app-config.json": "file:///d%3A/Work/git_space/backstage-dotnet-template/template.yaml"
+        "https://json.schemastore.org/app-config.json": "file:///d%3A/Work/git_space/backstage-dotnet-template/template.yaml",
+        "https://json.schemastore.org/catalog-info.json": "file:///d%3A/Work/git_space/Kubeosx/kubeos-dotnet-template/template.yaml"
     }
 }

@@ -123,23 +123,6 @@ spec:
           "DOCKER_PASSWORD" :  ${{ parameters.docker_password }}
           "AppName": ${{ parameters.project_name }}
 
-    - id: publishdev
-      name: Creating Dev Banch
-      action: publish:github
-      input:
-        allowedHosts: ["github.com"]
-        description: This is ${{ parameters.project_name }}
-        repoUrl: ${{ parameters.repoUrl }}
-        defaultBranch: dev
-        repoVisibility: public
-        requireCodeOwnerReviews: false
-        # protectDefaultBranch: false
-        # protectEnforceAdmins: false
-        secrets:
-          "DOCKER_USER": ${{ parameters.docker_username }}
-          "DOCKER_PASSWORD" :  ${{ parameters.docker_password }}
-          "AppName": ${{ parameters.project_name }}
-
     # Fetch Cloud CLuster Repo, Which is responsible to deploying using FLux
     - id: fetch-remote
       name: Fetch Remote kustomization
@@ -148,9 +131,7 @@ spec:
         url: https://github.com/kubeosx/kubeos-cluster.git
         targetPath: kubeos
 
-
-
-    # Fetch a remote repo for getting template to commit in flux repo.
+    # Fetch a remote repo for getting template to commit in flux sync repo.
     - id: fetch-remote
       name: Fetch Remote kustomization
       action: fetch:template
@@ -170,9 +151,8 @@ spec:
           project_org : kubeosx # kept default for this template
           repo_branch: main # kept default for this template
           http_port: 8080
-
-          
-    # update the kustomization file 
+     
+    # update the kustomization file to apply the ks 
     - id: append-file
       name: Append To File Or Create New
       action: roadiehq:utils:fs:append
@@ -193,7 +173,6 @@ spec:
         title: PR for new app :${{ parameters.project_name }}
         sourcePath: kubeos/clusters/dev
         targetPath: clusters/dev
-
 
     - id: register
       name: Register

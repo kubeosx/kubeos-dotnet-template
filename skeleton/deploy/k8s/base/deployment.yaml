@@ -16,7 +16,7 @@ spec:
         - name: my-${{values.project_name}}
           image: ${{values.docker_username}}/${{values.project_name}}:1
           ports:
-            - containerPort: 80
+            - containerPort: 8080
           resources:
             requests:
               cpu: 100m
