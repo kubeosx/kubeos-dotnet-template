@@ -116,8 +116,8 @@ spec:
         defaultBranch: main
         repoVisibility: public
         requireCodeOwnerReviews: false
-        # protectDefaultBranch: false
-        # protectEnforceAdmins: false
+        protectDefaultBranch: false
+        protectEnforceAdmins: false
         secrets:
           "DOCKER_USER": ${{ parameters.docker_username }}
           "DOCKER_PASSWORD" :  ${{ parameters.docker_password }}
