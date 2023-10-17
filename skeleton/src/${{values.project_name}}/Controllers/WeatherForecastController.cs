@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Metrics;
 
 namespace ${{values.project_name}}.Controllers;
 
@@ -37,6 +38,17 @@ public class WeatherForecastController : ControllerBase
         var client = new HttpClient();
         var response = await client.GetAsync(url);
         response.EnsureSuccessStatusCode();
+    }
+
+    [Route("metrictest")]
+    [HttpGet]
+    public async Task<IActionResult> Test()
+    {
+        Meter s_meter = new Meter("Test.Counter", "1.0.0");
+        Counter<int> s_hatsSold = s_meter.CreateCounter<int>("hits");
+        s_hatsSold.Add(1);
+        //var routeTemplate = httpContext.GetMetricsCurrentRouteName();
+        return Ok("test");
     }
 }
 
