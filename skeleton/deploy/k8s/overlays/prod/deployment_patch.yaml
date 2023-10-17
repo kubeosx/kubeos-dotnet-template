@@ -17,26 +17,12 @@ spec:
       annotations:
         backstage.io/kubernetes-id: ${{values.project_name | dump}}
     spec:
-      volumes:
-        # - name: rw-tmp-volume
-        #   persistentVolumeClaim:
-        #     claimName: imagestoreclaim
-        - name: tmp-rw-volume
-          emptyDir: {}
-        - name: appsettings-volume
-          configMap:
-            name: appsettings
       containers:
         - name: my-${{values.project_name}}
           image: ${{values.docker_username}}/${{values.project_name}}:1
           env: 
             - name: ASPNETCORE_ENVIRONMENT
-              value: "Development"
-          volumeMounts:
-            - mountPath: "/tmp"
-              name: tmp-rw-volume
-            - name: appsettings-volume
-              mountPath: /app/Settings    
+              value: "Production"  
           ports:
             - containerPort: 8080
           startupProbe:

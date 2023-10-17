@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
   name: ${{values.project_name}}
-namespace: ${{values.project_k8_namespace}}
+namespace: qa
 bases:
   - ../../base
 commonAnnotations:
