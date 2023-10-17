@@ -52,20 +52,6 @@ builder.Services.AddOpenTelemetry()
 
             switch (tracingExporter)
             {
-                case "jaeger":
-                    // DEPRECATED:  this is deprecated and no longer maintained
-                    otbuilder.AddJaegerExporter();
-
-                    otbuilder.ConfigureServices(services =>
-                    {
-                        // Use IConfiguration binding for Jaeger exporter options.
-                        services.Configure<JaegerExporterOptions>(builder.Configuration.GetSection("Jaeger"));
-
-                        // Customize the HttpClient that will be used when JaegerExporter is configured for HTTP transport.
-                        services.AddHttpClient("JaegerExporter", configureClient: (client) => client.DefaultRequestHeaders.Add("X-MyCustomHeader", "value"));
-                    });
-                    break;
-
                 case "zipkin":
                     otbuilder.AddZipkinExporter();
 
