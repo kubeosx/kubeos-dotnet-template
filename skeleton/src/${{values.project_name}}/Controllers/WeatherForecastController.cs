@@ -40,9 +40,8 @@ public class WeatherForecastController : ControllerBase
         response.EnsureSuccessStatusCode();
     }
 
-    [Route("metrictest")]
-    [HttpGet]
-    public async Task<IActionResult> Test()
+    [HttpGet("Metrictest")]
+    public IActionResult Metrictest()
     {
         Meter s_meter = new Meter("Test.Counter", "1.0.0");
         Counter<int> s_hatsSold = s_meter.CreateCounter<int>("hits");
