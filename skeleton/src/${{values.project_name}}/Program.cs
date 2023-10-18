@@ -27,6 +27,19 @@ Action<ResourceBuilder> configureResource = r => r.AddService(
     serviceVersion: typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown",
     serviceInstanceId: Environment.MachineName);
 
+
+builder.Services.AddOpenTelemetry()
+        .WithTracing(builder => builder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("dotseven"))
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation()
+            .AddConsoleExporter()
+            .AddOtlpExporter((option) => option.Endpoint = new Uri("http://jaeger-collector.observability.svc:4317/")))
+        .WithMetrics(builder => builder
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation()
+            .AddConsoleExporter()
+            .AddOtlpExporter((option) => option.Endpoint = new Uri("http://jaeger-collector.observability.svc:4317/")));
+
 // Create a service to expose ActivitySource, and Metric Instruments
 // for manual instrumentation
 builder.Services.AddSingleton<Instrumentation>();
