@@ -27,10 +27,14 @@ Action<ResourceBuilder> configureResource = r => r.AddService(
     serviceVersion: typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown",
     serviceInstanceId: Environment.MachineName);
 
+// Create a service to expose ActivitySource, and Metric Instruments
+// for manual instrumentation
+builder.Services.AddSingleton<Instrumentation>();
 
 // Configure OpenTelemetry tracing & metrics with auto-start using the
 // AddOpenTelemetry extension from OpenTelemetry.Extensions.Hosting.
 builder.Services.AddOpenTelemetry()
+        .ConfigureResource(configureResource)
         .WithTracing(otbuilder =>
         {
 
@@ -88,15 +92,15 @@ builder.Services.AddOpenTelemetry()
 
             switch (metricsExporter)
             {
-                //case "prometheus":
-                //    otbuilder.AddPrometheusExporter(options =>
-                //    {
-                //        options.ScrapeEndpointPath = "metrics";
-                //        // Use your endpoint and port here
-                //        //options.HttpListenerPrefixes = new string[] { $"http://localhost:{9090}/" };
-                //        options.ScrapeResponseCacheDurationMilliseconds = 0;
-                //    });
-                //    break;
+                case "prometheus":
+                   otbuilder.AddPrometheusExporter(options =>
+                   {
+                       options.ScrapeEndpointPath = "metrics";
+                       // Use your endpoint and port here
+                       //options.HttpListenerPrefixes = new string[] { $"http://localhost:{9090}/" };
+                       options.ScrapeResponseCacheDurationMilliseconds = 0;
+                   });
+                   break;
                 case "otlp":
                     otbuilder.AddOtlpExporter(otlpOptions =>
                     {
@@ -144,7 +148,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
-//app.UseOpenTelemetryPrometheusScrapingEndpoint();
+app.UseOpenTelemetryPrometheusScrapingEndpoint();
 app.UseHealthChecks("/health");
 app.UseHealthChecks("/healthz");
 
