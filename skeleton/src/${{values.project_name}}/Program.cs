@@ -29,7 +29,7 @@ Action<ResourceBuilder> configureResource = r => r.AddService(
 
 
 builder.Services.AddOpenTelemetry()
-        .WithTracing(builder => builder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("dotseven"))
+        .WithTracing(builder => builder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("${{values.project_name}}"))
             .AddAspNetCoreInstrumentation()
             .AddHttpClientInstrumentation()
             .AddConsoleExporter()
