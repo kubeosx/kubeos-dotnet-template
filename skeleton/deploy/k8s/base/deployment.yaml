@@ -41,13 +41,13 @@ spec:
             - containerPort: 8080
           startupProbe:
             httpGet:
-              path: /
+              path: /health
               port: 8080
             failureThreshold: 30
             periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /
+              path: /health
               port: 8080
             initialDelaySeconds: 10
           resources:

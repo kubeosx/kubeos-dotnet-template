@@ -23,19 +23,6 @@ spec:
           env: 
             - name: ASPNETCORE_ENVIRONMENT
               value: "Development"  
-          ports:
-            - containerPort: 8080
-          startupProbe:
-            httpGet:
-              path: /
-              port: 8080
-            failureThreshold: 30
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 8080
-            initialDelaySeconds: 10
           resources:
             requests:
               cpu: 100m
