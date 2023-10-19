@@ -5,6 +5,8 @@ metadata:
   namespace: ${{values.project_k8_namespace}}
   labels:
     metrics-scraper: prometheus
+  annotations:
+    backstage.io/kubernetes-id: ${{values.project_name | dump}}
 spec:
   selector:
     app: ${{values.project_name}}
