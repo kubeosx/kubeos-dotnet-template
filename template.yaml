@@ -19,7 +19,8 @@ spec:
     github.com/project-slug: kubeosx/kubeos-dotnet-template
     backstage.io/techdocs-ref: dir:.
   parameters:
-    - title: Dotnet Solution/Project details
+    # Section to Configire Project
+    - title: Configire Project
       required:
         - project_name
         - description
@@ -46,6 +47,27 @@ spec:
           ui:options:
             allowedKinds:
               - Group
+
+
+        system:
+          title: System
+          type: string
+          description: System of the component
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              - kind: System
+    # Section to Configire Project Dependencies
+    - title: Configire Project Dependencies
+      required:
+        - project_name
+        - description
+        - owner
+        - system
+      properties:
+        use_auth_api:
+          title: Uses Auth Api
+          type: boolean
         name:
           title: Select environments
           type: array
@@ -57,7 +79,6 @@ spec:
               - development
           uniqueItems: true
           ui:widget: checkboxes
-          
         api:
           title: System
           type: array
@@ -66,17 +87,34 @@ spec:
           ui:options:
             catalogFilter:
               - kind: API
-
-        system:
-          title: System
-          type: string
-          description: System of the component
-          ui:field: EntityPicker
+        arrayObjects:
+          title: Array with custom objects
+          type: array
+          minItems: 0
           ui:options:
-            catalogFilter:
-              - kind: System
-
-    - title: Repository details
+            addable: true
+            orderable: true
+            removable: true
+          items:
+            type: object
+            properties:
+              array:
+                title: Array string with default value
+                type: string
+                default: value3
+                enum:
+                  - value1
+                  - value2
+                  - value3
+              flag:
+                title: Boolean flag
+                type: boolean
+                ui:widget: radio
+              someInput:
+                title: Simple text input
+                type: string
+    # Section to Configire Project Repository details
+    - title: Configire Project Repository details
       required:
         - repoUrl
       properties:
@@ -87,8 +125,8 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
-
-    - title: Provide Docker information
+    # Section to Configire Project Docker information
+    - title: Configire Project Docker information
       required:
         - docker_username
         - docker_password
