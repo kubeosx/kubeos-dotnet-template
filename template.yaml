@@ -65,7 +65,7 @@ spec:
       properties:
 
         consumes_api:
-          title: Api Dependencies
+          title: Add all Api Dependencies
           type: array
           description: Add All existing API this component consumes
           minItems: 0
@@ -76,22 +76,34 @@ spec:
           items:
             type: object
             properties:
-              array:
-                title: Component Dependencies
-                type: array
-                description: System of the component
+              apis:
+                title: API Dependencies
+                type: string
+                description: Select an API
                 ui:field: EntityPicker
                 ui:options:
                   catalogFilter:
                     - kind: API
         uses_components:
-          title: Component Dependencies
+          title: Add all Component Dependencies
           type: array
-          description: Components this component depends on
-          ui:field: EntityPicker
+          description: Add All Components this component depends on
+          minItems: 0
           ui:options:
-            catalogFilter:
-              - kind: Component
+            addable: true
+            orderable: true
+            removable: true
+          items:
+            type: object
+            properties:
+              component:
+                title: Component Dependencies
+                type: string
+                description: Select a component
+                ui:field: EntityPicker
+                ui:options:
+                  catalogFilter:
+                    - kind: Component
 
     # Section to Configire Project Repository details
     - title: Configire Project Repository details
