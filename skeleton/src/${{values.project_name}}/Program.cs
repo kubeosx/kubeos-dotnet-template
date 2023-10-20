@@ -1,6 +1,7 @@
 ﻿using ${{values.project_name}};
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.OpenApi.Models;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Instrumentation.AspNetCore;
 using OpenTelemetry.Metrics;
@@ -8,7 +9,7 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Serilog;
 using Serilog.Events;
-using Serilog.Sinks.SystemConsole.Themes;
+using Serilog.Sinks.SystemConsole.Themes
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -133,18 +134,29 @@ builder.Services.Configure<FormOptions>(options =>
 builder.Services.AddHttpClient();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddOpenApiDocument(document =>
-            {
-                document.DocumentName = "openapi";
-                document.Title = "doteight Service";
-                document.Description = "HTTP REST API service for doteight";
-                document.Version = "1.1.0";
-            });
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "${{values.project_name}} API",
+        Description = "An ASP.NET Core Web API: ${{values.project_name}}",
+        TermsOfService = new Uri("https://example.com/terms"),
+        Contact = new OpenApiContact
+        {
+            Name = "Example Contact",
+            Url = new Uri("https://example.com/contact")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Example License",
+            Url = new Uri("https://example.com/license")
+        }
+    });
+});
 
 builder.Services.AddHealthChecks();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 
 var app = builder.Build();
 
@@ -155,19 +167,10 @@ app.UseHealthChecks("/healthz");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
-    app.UseOpenApi(options =>
-    {
-        options.DocumentName = "openapi";
-        options.Path = "/openapi/v1/openapi.json";
-    });
-    app.UseSwaggerUi3(options =>
-    {
-        options.Path = "/openapi";
-        options.DocumentPath = "/openapi/v1/openapi.json";
-        options.DocExpansion = "list";
-    });
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
