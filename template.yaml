@@ -27,7 +27,7 @@ spec:
         - system
       properties:
         project_name:
-          title: Name
+          title: Project Name
           type: string
           description: Name of the project
           maxLength: 50
@@ -39,14 +39,25 @@ spec:
           description: Help others understand what this web api is for.
 
         owner:
-          title: Owner
+          title: Component Owner
           type: string
           description: Owner of the component
           ui:field: OwnerPicker
           ui:options:
             allowedKinds:
               - Group
-
+        name:
+          title: Select environments
+          type: array
+          items:
+            type: string
+            enum:
+              - production
+              - staging
+              - development
+          uniqueItems: true
+          ui:widget: checkboxes
+          
         api:
           title: System
           type: array
