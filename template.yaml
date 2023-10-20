@@ -48,56 +48,26 @@ spec:
             allowedKinds:
               - Group
 
-
         system:
-          title: System
+          title: Assign System
           type: string
-          description: System of the component
+          description: System this component belongs to
           ui:field: EntityPicker
           ui:options:
             catalogFilter:
               - kind: System
+
     # Section to Configire Project Dependencies
     - title: Configire Project Dependencies
       required:
-        - project_name
-        - description
-        - owner
-        - system
+        - consumes_api
+        - uses_components
       properties:
-        use_auth_api:
-          title: Uses Auth Api
-          type: boolean
-        name:
-          title: Select environments
-          type: array
-          items:
-            type: string
-            enum:
-              - production
-              - staging
-              - development
-          uniqueItems: true
-          ui:widget: checkboxes
+
         consumes_api:
           title: Api Dependencies
           type: array
-          description: System of the component
-          ui:field: EntityPicker
-          ui:options:
-            catalogFilter:
-              - kind: API
-        uses_components:
-          title: Component Dependencies
-          type: array
-          description: System of the component
-          ui:field: EntityPicker
-          ui:options:
-            catalogFilter:
-              - kind: Component
-        arrayObjects:
-          title: Array with custom objects
-          type: array
+          description: Add All existing API this component consumes
           minItems: 0
           ui:options:
             addable: true
@@ -113,14 +83,16 @@ spec:
                 ui:field: EntityPicker
                 ui:options:
                   catalogFilter:
-                    - kind: Component
-              flag:
-                title: Boolean flag
-                type: boolean
-                ui:widget: radio
-              someInput:
-                title: Simple text input
-                type: string
+                    - kind: API
+        uses_components:
+          title: Component Dependencies
+          type: array
+          description: Components this component depends on
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              - kind: Component
+
     # Section to Configire Project Repository details
     - title: Configire Project Repository details
       required:
@@ -150,6 +122,11 @@ spec:
           type: string
           description: Passwod for Login, will be stored as secrets
 
+    - title: Configure Deployments
+      deploy_k8:
+        title: deploy to Kuberntes
+        type: boolean
+
   steps:
     - id: template
       name: Fetch Skeleton + Template
@@ -171,6 +148,8 @@ spec:
           project_org : kubeosx # kept default for this template
           repo_branch: main # kept default for this template
           http_port: 8080
+          consumes_api: ${{ parameters.consumes_api }}
+          uses_components: ${{ parameters.uses_components }}
 
     - id: publishrepo
       name: Publish Main
