@@ -79,14 +79,22 @@ spec:
               - development
           uniqueItems: true
           ui:widget: checkboxes
-        api:
-          title: System
+        consumes_api:
+          title: Api Dependencies
           type: array
           description: System of the component
           ui:field: EntityPicker
           ui:options:
             catalogFilter:
               - kind: API
+        uses_components:
+          title: Component Dependencies
+          type: array
+          description: System of the component
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              - kind: Component
         arrayObjects:
           title: Array with custom objects
           type: array
@@ -99,13 +107,13 @@ spec:
             type: object
             properties:
               array:
-                title: Array string with default value
-                type: string
-                default: value3
-                enum:
-                  - value1
-                  - value2
-                  - value3
+                title: Component Dependencies
+                type: array
+                description: System of the component
+                ui:field: EntityPicker
+                ui:options:
+                  catalogFilter:
+                    - kind: Component
               flag:
                 title: Boolean flag
                 type: boolean
