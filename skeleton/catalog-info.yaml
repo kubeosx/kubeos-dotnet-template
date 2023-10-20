@@ -34,7 +34,7 @@ spec:
   {% endfor %}
   consumesApis:
   {% for api in values.consumes_apis %}
-    - {{ api.api }}
+    - ${{ api.api }}
   {% endfor %}
 ---
 apiVersion: backstage.io/v1alpha1
