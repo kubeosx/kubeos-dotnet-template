@@ -146,7 +146,7 @@ spec:
 
   steps:
     - id: log
-      name: Parse Repo URL
+      name: Debug Logs
       action: debug:log
       input:
         extra: |
