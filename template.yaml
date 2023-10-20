@@ -84,6 +84,7 @@ spec:
                 ui:options:
                   catalogFilter:
                     - kind: API
+                    
         uses_components:
           title: Add all Component Dependencies
           type: array
@@ -164,9 +165,8 @@ spec:
         copyWithoutRender:
           - .github/workflows/*
         values:
-          description: ${{ parameters.description }}
           project_name: ${{ parameters.project_name }}
-          otlp_url: "http://jaeger-collector.observability.svc:4317/"
+          description: ${{ parameters.description }}
           owner: ${{ parameters.owner }}
           system: ${{ parameters.system }}
           destination: ${{ parameters.repoUrl | parseRepoUrl }}
