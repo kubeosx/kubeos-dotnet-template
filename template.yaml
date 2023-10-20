@@ -148,8 +148,8 @@ spec:
           project_org : kubeosx # kept default for this template
           repo_branch: main # kept default for this template
           http_port: 8080
-          consumes_api: ${{ parameters.consumes_api }}
-          uses_components: ${{ parameters.uses_components }}
+          consumes_api: ${{ parameters.consumes_api.items }}
+          uses_components: ${{ parameters.uses_components.items }}
 
     - id: publishrepo
       name: Publish Main
