@@ -150,7 +150,7 @@ spec:
       action: debug:log
       input:
         extra: |
-            $ {{ parameters.uses_components | dump}}
+            ${{ parameters.uses_components | dump}}
             {% for component in parameters.uses_components %}
               - ${{ component }}
             {% endfor %}
