@@ -9,7 +9,7 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Serilog;
 using Serilog.Events;
-using Serilog.Sinks.SystemConsole.Themes
+using Serilog.Sinks.SystemConsole.Themes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,9 +38,6 @@ builder.Services.AddOpenTelemetry()
         .ConfigureResource(configureResource)
         .WithTracing(otbuilder =>
         {
-
-            // Tracing
-
             // Ensure the TracerProvider subscribes to any custom ActivitySources.
             otbuilder
                 .AddSource(Instrumentation.ActivitySourceName)
@@ -141,16 +138,16 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1",
         Title = "${{values.project_name}} API",
         Description = "An ASP.NET Core Web API: ${{values.project_name}}",
-        TermsOfService = new Uri("https://example.com/terms"),
+        TermsOfService = new Uri("https://github.com/${{values.destination.owner}}/${{values.destination.repo}}"),
         Contact = new OpenApiContact
         {
-            Name = "Example Contact",
-            Url = new Uri("https://example.com/contact")
+            Name = "Contact Info",
+            Url = new Uri("https://github.com/${{values.destination.owner}}/${{values.destination.repo}}")
         },
         License = new OpenApiLicense
         {
-            Name = "Example License",
-            Url = new Uri("https://example.com/license")
+            Name = "License",
+            Url = new Uri("https://github.com/${{values.destination.owner}}/${{values.destination.repo}}")
         }
     });
 });

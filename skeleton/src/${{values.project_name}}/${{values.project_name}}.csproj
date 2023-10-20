@@ -17,7 +17,6 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
 	<ItemGroup>
-		<PackageReference Include="NSwag.AspNetCore" Version="13.19.0" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
 		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.0-rc.2.23480.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.12" />

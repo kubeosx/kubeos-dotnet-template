@@ -47,6 +47,15 @@ spec:
             allowedKinds:
               - Group
 
+        api:
+          title: System
+          type: string
+          description: System of the component
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              - kind: API
+
         system:
           title: System
           type: string
