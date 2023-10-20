@@ -30,7 +30,7 @@ spec:
         project_name:
           title: Project Name
           type: string
-          description: Name of the project
+          description: Name of the project in small case
           maxLength: 50
           pattern: '^[a-z_.][a-z0-9_.-]*[a-z0-9]$'
  
