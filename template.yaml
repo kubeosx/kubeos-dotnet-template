@@ -32,7 +32,7 @@ spec:
           type: string
           description: Name of the project
           maxLength: 50
-          pattern: '^[a-z0-9]+$'
+          pattern: '^[a-z_.][a-z0-9_.-]*[a-z0-9]$'
  
         description:
           title: Description
@@ -84,7 +84,7 @@ spec:
                 ui:options:
                   catalogFilter:
                     - kind: API
-                    
+
         uses_components:
           title: Add all Component Dependencies
           type: array
