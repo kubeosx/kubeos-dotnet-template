@@ -19,43 +19,43 @@ spec:
     github.com/project-slug: kubeosx/kubeos-dotnet-template
     backstage.io/techdocs-ref: dir:.
   parameters:
-    # # Section to Configire Project
-    # - title: Configire Project
-    #   required:
-    #     - project_name
-    #     - description
-    #     - owner
-    #     - system
-    #   properties:
-    #     project_name:
-    #       title: Project Name
-    #       type: string
-    #       description: Name of the project
-    #       maxLength: 50
-    #       pattern: '^[a-z0-9]+$'
+    # Section to Configire Project
+    - title: Configire Project
+      required:
+        - project_name
+        - description
+        - owner
+        - system
+      properties:
+        project_name:
+          title: Project Name
+          type: string
+          description: Name of the project
+          maxLength: 50
+          pattern: '^[a-z0-9]+$'
  
-    #     description:
-    #       title: Description
-    #       type: string
-    #       description: Help others understand what this web api is for.
+        description:
+          title: Description
+          type: string
+          description: Help others understand what this web api is for.
 
-    #     owner:
-    #       title: Component Owner
-    #       type: string
-    #       description: Owner of the component
-    #       ui:field: OwnerPicker
-    #       ui:options:
-    #         allowedKinds:
-    #           - Group
+        owner:
+          title: Component Owner
+          type: string
+          description: Owner of the component
+          ui:field: OwnerPicker
+          ui:options:
+            allowedKinds:
+              - Group
 
-    #     system:
-    #       title: Assign System
-    #       type: string
-    #       description: System this component belongs to
-    #       ui:field: EntityPicker
-    #       ui:options:
-    #         catalogFilter:
-    #           - kind: System
+        system:
+          title: Assign System
+          type: string
+          description: System this component belongs to
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              - kind: System
 
     # Section to Configire Project Dependencies
     - title: Configire Project Dependencies
@@ -105,44 +105,44 @@ spec:
                   catalogFilter:
                     - kind: Component
 
-    # # Section to Configire Project Repository details
-    # - title: Configire Project Repository details
-    #   required:
-    #     - repoUrl
-    #   properties:
-    #     repoUrl:
-    #       title: Repository Location
-    #       type: string
-    #       ui:field: RepoUrlPicker
-    #       ui:options:
-    #         allowedHosts:
-    #           - github.com
+    # Section to Configire Project Repository details
+    - title: Configire Project Repository details
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
 
-    # # Section to Configire Project Docker information
-    # - title: Configire Project Docker information
-    #   required:
-    #     - docker_username
-    #     - docker_password
-    #   properties:
-    #     docker_username:
-    #       title: Name
-    #       type: string
-    #       description: Docker user name for login and will be pushed to hub.
-    #       ui:field: EntityNamePicker
+    # Section to Configire Project Docker information
+    - title: Configire Project Docker information
+      required:
+        - docker_username
+        - docker_password
+      properties:
+        docker_username:
+          title: Name
+          type: string
+          description: Docker user name for login and will be pushed to hub.
+          ui:field: EntityNamePicker
 
-    #     docker_password:
-    #       title: Password
-    #       type: string
-    #       description: Passwod for Login, will be stored as secrets
+        docker_password:
+          title: Password
+          type: string
+          description: Passwod for Login, will be stored as secrets
 
-    # - title: Configure Deployments
-    #   required:
-    #     - docker_username
-    #     - docker_password
-    #   properties:
-    #     deploy_k8:
-    #       title: deploy to Kuberntes
-    #       type: boolean
+    - title: Configure Deployments
+      required:
+        - docker_username
+        - docker_password
+      properties:
+        deploy_k8:
+          title: deploy to Kuberntes
+          type: boolean
 
   steps:
     - id: log
@@ -156,112 +156,112 @@ spec:
             {% endfor %}
 
 
-  #   - id: template
-  #     name: Fetch Skeleton + Template
-  #     action: fetch:template
-  #     input:
-  #       url: ./skeleton
-  #       copyWithoutRender:
-  #         - .github/workflows/*
-  #       values:
-  #         description: ${{ parameters.description }}
-  #         project_name: ${{ parameters.project_name }}
-  #         otlp_url: "http://jaeger-collector.observability.svc:4317/"
-  #         owner: ${{ parameters.owner }}
-  #         system: ${{ parameters.system }}
-  #         destination: ${{ parameters.repoUrl | parseRepoUrl }}
-  #         docker_username: ${{ parameters.docker_username }}
-  #         project_k8_namespace: dev # ket default for this template as a standard to become
-  #         kustomize_path : ./deploy/k8s/overlays/dev # kepr default for this template as a standar to become
-  #         project_org : kubeosx # kept default for this template
-  #         repo_branch: main # kept default for this template
-  #         http_port: 8080
-  #         consumes_apis: ${{ parameters.consumes_apis }}
-  #         uses_components: ${{ parameters.uses_components }}
+    - id: template
+      name: Fetch Skeleton + Template
+      action: fetch:template
+      input:
+        url: ./skeleton
+        copyWithoutRender:
+          - .github/workflows/*
+        values:
+          description: ${{ parameters.description }}
+          project_name: ${{ parameters.project_name }}
+          otlp_url: "http://jaeger-collector.observability.svc:4317/"
+          owner: ${{ parameters.owner }}
+          system: ${{ parameters.system }}
+          destination: ${{ parameters.repoUrl | parseRepoUrl }}
+          docker_username: ${{ parameters.docker_username }}
+          project_k8_namespace: dev # ket default for this template as a standard to become
+          kustomize_path : ./deploy/k8s/overlays/dev # kepr default for this template as a standar to become
+          project_org : kubeosx # kept default for this template
+          repo_branch: main # kept default for this template
+          http_port: 8080
+          consumes_apis: ${{ parameters.consumes_apis }}
+          uses_components: ${{ parameters.uses_components }}
 
-  #   - id: publishrepo
-  #     name: Publish Main
-  #     action: publish:github
-  #     input:
-  #       allowedHosts: ["github.com"]
-  #       description: This is ${{ parameters.project_name }}
-  #       repoUrl: ${{ parameters.repoUrl }}
-  #       defaultBranch: main
-  #       repoVisibility: public
-  #       requireCodeOwnerReviews: false
-  #       protectDefaultBranch: false
-  #       protectEnforceAdmins: false
-  #       secrets:
-  #         "DOCKER_USER": ${{ parameters.docker_username }}
-  #         "DOCKER_PASSWORD" :  ${{ parameters.docker_password }}
-  #         "AppName": ${{ parameters.project_name }}
+    - id: publishrepo
+      name: Publish Main
+      action: publish:github
+      input:
+        allowedHosts: ["github.com"]
+        description: This is ${{ parameters.project_name }}
+        repoUrl: ${{ parameters.repoUrl }}
+        defaultBranch: main
+        repoVisibility: public
+        requireCodeOwnerReviews: false
+        protectDefaultBranch: false
+        protectEnforceAdmins: false
+        secrets:
+          "DOCKER_USER": ${{ parameters.docker_username }}
+          "DOCKER_PASSWORD" :  ${{ parameters.docker_password }}
+          "AppName": ${{ parameters.project_name }}
 
-  #   # Fetch Cloud CLuster Repo, Which is responsible to deploying using FLux
-  #   - id: fetch-remote
-  #     name: Fetch Remote kustomization
-  #     action: fetch:plain
-  #     input:
-  #       url: https://github.com/kubeosx/kubeos-cluster.git
-  #       targetPath: kubeos
+    # Fetch Cloud CLuster Repo, Which is responsible to deploying using FLux
+    - id: fetch-remote
+      name: Fetch Remote kustomization
+      action: fetch:plain
+      input:
+        url: https://github.com/kubeosx/kubeos-cluster.git
+        targetPath: kubeos
 
-  #   # Fetch a remote repo for getting template to commit in flux sync repo.
-  #   - id: fetch-remote
-  #     name: Fetch Remote kustomization
-  #     action: fetch:template
-  #     input:
-  #       url: https://github.com/kubeosx/kubeos-autopr-templates.git
-  #       path:
-  #       targetPath: kubeos/clusters/dev
-  #       values:
-  #         description: ${{ parameters.description }}
-  #         project_name: ${{ parameters.project_name }}
-  #         owner: ${{ parameters.owner }}
-  #         system: ${{ parameters.system }}
-  #         destination: ${{ parameters.repoUrl | parseRepoUrl }}
-  #         docker_username: ${{ parameters.docker_username }}
-  #         project_k8_namespace: dev # ket default for this template as a standard to become
-  #         kustomize_path : ./deploy/k8s/overlays/dev # kepr default for this template as a standar to become
-  #         project_org : kubeosx # kept default for this template
-  #         repo_branch: main # kept default for this template
-  #         http_port: 8080
+    # Fetch a remote repo for getting template to commit in flux sync repo.
+    - id: fetch-remote
+      name: Fetch Remote kustomization
+      action: fetch:template
+      input:
+        url: https://github.com/kubeosx/kubeos-autopr-templates.git
+        path:
+        targetPath: kubeos/clusters/dev
+        values:
+          description: ${{ parameters.description }}
+          project_name: ${{ parameters.project_name }}
+          owner: ${{ parameters.owner }}
+          system: ${{ parameters.system }}
+          destination: ${{ parameters.repoUrl | parseRepoUrl }}
+          docker_username: ${{ parameters.docker_username }}
+          project_k8_namespace: dev # ket default for this template as a standard to become
+          kustomize_path : ./deploy/k8s/overlays/dev # kepr default for this template as a standar to become
+          project_org : kubeosx # kept default for this template
+          repo_branch: main # kept default for this template
+          http_port: 8080
      
-  #   # update the kustomization file to apply the ks 
-  #   - id: append-file
-  #     name: Append To File Or Create New
-  #     action: roadiehq:utils:fs:append
-  #     input:
-  #       path: kubeos/clusters/dev/kustomization.yaml
-  #       content: '${{ "\n  - "+ parameters.project_name }}/'
+    # update the kustomization file to apply the ks 
+    - id: append-file
+      name: Append To File Or Create New
+      action: roadiehq:utils:fs:append
+      input:
+        path: kubeos/clusters/dev/kustomization.yaml
+        content: '${{ "\n  - "+ parameters.project_name }}/'
 
-  #   # PR back the change
-  #   - id: pr-repo
-  #     name: PR to repo
-  #     action: publish:github:pull-request
-  #     input:
-  #       repoUrl: github.com?repo=kubeos-cluster&owner=kubeosx
-  #       description: This is commiting project ${{ parameters.project_name }} for deployment
-  #       branchName: feature/Onboarding-${{ parameters.project_name }}
-  #       targetBranchName: main
-  #       gitCommitMessage: Add New Deployment Config
-  #       title: PR for new app :${{ parameters.project_name }}
-  #       sourcePath: kubeos/clusters/dev
-  #       targetPath: clusters/dev
+    # PR back the change
+    - id: pr-repo
+      name: PR to repo
+      action: publish:github:pull-request
+      input:
+        repoUrl: github.com?repo=kubeos-cluster&owner=kubeosx
+        description: This is commiting project ${{ parameters.project_name }} for deployment
+        branchName: feature/Onboarding-${{ parameters.project_name }}
+        targetBranchName: main
+        gitCommitMessage: Add New Deployment Config
+        title: PR for new app :${{ parameters.project_name }}
+        sourcePath: kubeos/clusters/dev
+        targetPath: clusters/dev
 
-  #   - id: register
-  #     name: Register
-  #     action: catalog:register
-  #     input:
-  #       repoContentsUrl: ${{ steps.publishrepo.output.repoContentsUrl }}
-  #       catalogInfoPath: "/catalog-info.yaml"
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publishrepo.output.repoContentsUrl }}
+        catalogInfoPath: "/catalog-info.yaml"
 
-  # output: 
-  #   links:
-  #     - title: Repository
-  #       url: ${{ steps.publishrepo.output.remoteUrl }}
-  #     - title: Open in catalog
-  #       icon: catalog
-  #       entityRef: ${{ steps.register.output.entityRef }}
-  #     - title: Deployment Repo
-  #       url: ${{ steps.pr-repo.output.remoteUrl }}
-  #     - title: Pull Request Number
-  #       url: ${{ steps.pr-repo.output.pullRequestNumber }}
+  output: 
+    links:
+      - title: Repository
+        url: ${{ steps.publishrepo.output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
+      - title: Deployment Repo
+        url: ${{ steps.pr-repo.output.remoteUrl }}
+      - title: Pull Request Number
+        url: ${{ steps.pr-repo.output.pullRequestNumber }}
