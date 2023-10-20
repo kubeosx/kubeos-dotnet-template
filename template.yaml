@@ -64,7 +64,7 @@ spec:
         - uses_components
       properties:
 
-        consumes_api:
+        consumes_apis:
           title: Add all Api Dependencies
           type: array
           description: Add All existing API this component consumes
@@ -117,6 +117,7 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
+
     # Section to Configire Project Docker information
     - title: Configire Project Docker information
       required:
@@ -135,9 +136,13 @@ spec:
           description: Passwod for Login, will be stored as secrets
 
     - title: Configure Deployments
-      deploy_k8:
-        title: deploy to Kuberntes
-        type: boolean
+      required:
+        - docker_username
+        - docker_password
+      properties:
+        deploy_k8:
+          title: deploy to Kuberntes
+          type: boolean
 
   steps:
     - id: template
@@ -160,8 +165,8 @@ spec:
           project_org : kubeosx # kept default for this template
           repo_branch: main # kept default for this template
           http_port: 8080
-          consumes_api: ${{ parameters.consumes_api.items }}
-          uses_components: ${{ parameters.uses_components.items }}
+          consumes_apis: ${{ parameters.consumes_apis }}
+          uses_components: ${{ parameters.uses_components }}
 
     - id: publishrepo
       name: Publish Main

@@ -30,11 +30,11 @@ spec:
     - "${{values.project_name}}-api"
   dependsOn:
   {% for item in values.uses_components %}
-    - {{ item.component }}
+    - "{{ item.items | dump }}"
   {% endfor %}
   consumesApis:
-  {% for item in values.consumes_api %}
-    - {{ item.title }}
+  {% for items in values.consumes_apis %}
+    - "{{ items.apis  | dump}}"
   {% endfor %}
 ---
 apiVersion: backstage.io/v1alpha1
