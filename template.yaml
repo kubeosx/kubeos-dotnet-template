@@ -60,7 +60,7 @@ spec:
     # Section to Configire Project Dependencies
     - title: Configire Project Dependencies
       required:
-        - consumes_api
+        - consumes_apis
         - uses_components
       properties:
 
