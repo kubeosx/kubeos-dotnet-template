@@ -2,14 +2,24 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: kubeos-dotnet-template
-  title: "Kubeos .Net 7 Service with Docker Build"
-  description: "Create a simple web api using .Net 7, which has the docker file, It also has capability of adding github pipeline to build docker image and push it to docker hub."
+  title: ".Net 7 Api in Kubernetes"
+  description: "A Full Fledged .Net 7 Api built with cloud standard for distributed logging, metrics, tracing. Preconfigured github pipeline update open api spec to build docker image and push it to docker hub, and PR to deploy the image in kubernetes"
   tags:
     - recommended
     - dotnet
-    - github
+    - openapi
     - docker
     - kubernetes
+  links:
+    - url: https://github.com/kubeosx/kubeos-dotnet-template
+      icon: web
+      title: Github
+    - url: https://github.com/kubeosx/kubeos-dotnet-template/issues
+      icon: web
+      title: Github Issues
+    - url: https://github.com/kubeosx/kubeos-dotnet-template/blob/main/README.md
+      title: Docs
+      icon: code
   system: kubeos-idp
 spec:
   owner: platform-engineering-team
