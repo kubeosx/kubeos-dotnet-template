@@ -30,6 +30,7 @@ spec:
     - "${{values.project_name}}-api"
   {%- if values.uses_components %}
   dependsOn:
+    - component:default/kubeos-github-workflows
   {% for component in values.uses_components %}
     - ${{ component.component }}
   {% endfor %}
