@@ -41,8 +41,8 @@ spec:
           title: Dotnet Project Name
           type: string
           description: Name of the project in small case
-          maxLength: 50
-          pattern: '^[A-Z][.][A-Z][a-zA-Z0-9]*$'
+          maxLength: 100
+          pattern: '^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*$'
  
         description:
           title: Description
@@ -151,6 +151,8 @@ spec:
           title: Image name to be used
           type: string
           description: Passwod for Login, will be stored as secrets
+          maxLength: 100
+          pattern: '^[a-z]+(-[a-z]+)*$'
 
     - title: Configure Deployments
       required:
@@ -163,6 +165,9 @@ spec:
           title: Name of Deployment
           type: string
           description: Name of the Deployment you want to create in kubernetes
+          maxLength: 100
+          pattern: '^[a-z]+(-[a-z]+)*$'
+          
   steps:
     - id: log
       name: Debug Logs
