@@ -250,7 +250,8 @@ spec:
           kustomize_path : ./deploy/k8s/overlays/dev # kepr default for this template as a standar to become
           project_org : kubeosx # kept default for this template
           repo_branch: main # kept default for this template
-          http_port: 8080
+          docker_image_name: ${{ parameters.docker_image_name }}
+          project_name_in_k8: ${{ parameters.project_name_in_k8 }}
      
     # update the kustomization file to apply the ks 
     - id: append-file
@@ -258,7 +259,7 @@ spec:
       action: roadiehq:utils:fs:append
       input:
         path: kubeos/clusters/dev/kustomization.yaml
-        content: '${{ "\n  - "+ parameters.project_name }}/'
+        content: '${{ "\n  - "+ parameters.project_name_in_k8 }}/'
 
     # PR back the change
     - id: pr-repo
@@ -266,11 +267,11 @@ spec:
       action: publish:github:pull-request
       input:
         repoUrl: github.com?repo=kubeos-cluster&owner=kubeosx
-        description: This is commiting project ${{ parameters.project_name }} for deployment
-        branchName: feature/Onboarding-${{ parameters.project_name }}
+        description: This is commiting project ${{ parameters.project_name_in_k8 }} for deployment
+        branchName: feature/Onboarding-${{ parameters.project_name_in_k8 }}
         targetBranchName: main
         gitCommitMessage: Add New Deployment Config
-        title: PR for new app :${{ parameters.project_name }}
+        title: PR for new app :${{ parameters.project_name_in_k8 }}
         sourcePath: kubeos/clusters/dev
         targetPath: clusters/dev
 
