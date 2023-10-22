@@ -38,19 +38,19 @@ spec:
         - system
       properties:
         project_name:
-          title: Project Name
+          title: Dotnet Project Name
           type: string
           description: Name of the project in small case
           maxLength: 50
-          pattern: '^[a-z_.][a-z0-9_-]*[a-z0-9]$'
+          pattern: '^[a-z_.][a-z0-9_-.]*[a-z0-9]$'
  
         description:
           title: Description
           type: string
-          description: Help others understand what this web api is for.
+          description: Add a readme if you have. Help others understand what this web api is for.
 
         owner:
-          title: Component Owner
+          title: Assign Component Owner
           type: string
           description: Owner of the component
           ui:field: OwnerPicker
@@ -71,7 +71,7 @@ spec:
     - title: Configire Project Dependencies
       required:
         - consumes_apis
-        - uses_components
+        # - uses_components
       properties:
 
         consumes_apis:
@@ -146,6 +146,11 @@ spec:
           type: string
           description: Passwod for Login, will be stored as secrets
 
+        docker_image_name:
+          title: Image name to be used
+          type: string
+          description: Passwod for Login, will be stored as secrets
+
     - title: Configure Deployments
       required:
         - docker_username
@@ -154,7 +159,9 @@ spec:
         deploy_k8:
           title: deploy to Kuberntes
           type: boolean
-
+        project_name_in_k8:
+          title: deploy to Kuberntes
+          type: boolean
   steps:
     - id: log
       name: Debug Logs
@@ -188,6 +195,8 @@ spec:
           http_port: 8080
           consumes_apis: ${{ parameters.consumes_apis }}
           uses_components: ${{ parameters.uses_components }}
+          docker_image_name: ${{ parameters.docker_image_name }}
+          project_name_in_k8: ${{ parameters.project_name_in_k8 }}
 
     - id: publishrepo
       name: Publish Main
@@ -204,7 +213,8 @@ spec:
         secrets:
           "DOCKER_USER": ${{ parameters.docker_username }}
           "DOCKER_PASSWORD" :  ${{ parameters.docker_password }}
-          "AppName": ${{ parameters.project_name }}
+          "APP_NAME": ${{ parameters.project_name }}
+          "CONTAINER_IMAGE_NAME": ${{ parameters.docker_image_name }}
 
     # Fetch Cloud CLuster Repo, Which is responsible to deploying using FLux
     - id: fetch-remote

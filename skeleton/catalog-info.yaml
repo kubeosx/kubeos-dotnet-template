@@ -28,14 +28,18 @@ spec:
   system:  ${{values.system | dump}}
   providesApis:
     - "${{values.project_name}}-api"
+  {%- if values.uses_components %}
   dependsOn:
   {% for component in values.uses_components %}
     - ${{ component.component }}
   {% endfor %}
+  {%- endif %}
+  {%- if values.consumes_apis %}
   consumesApis:
   {% for api in values.consumes_apis %}
     - ${{ api.api }}
   {% endfor %}
+  {%- endif %}
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
