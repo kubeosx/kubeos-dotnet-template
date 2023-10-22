@@ -30,7 +30,7 @@ spec:
     backstage.io/techdocs-ref: dir:.
   parameters:
     # Section to Configire Project
-    - title: Configire Project
+    - title: Configure Project
       required:
         - project_name
         - description
@@ -71,7 +71,7 @@ spec:
     - title: Configire Project Dependencies
       required:
         - consumes_apis
-        # - uses_components
+        - uses_components
       properties:
 
         consumes_apis:
@@ -134,6 +134,7 @@ spec:
       required:
         - docker_username
         - docker_password
+        - docker_image_name
       properties:
         docker_username:
           title: Name
@@ -153,15 +154,15 @@ spec:
 
     - title: Configure Deployments
       required:
-        - docker_username
-        - docker_password
+        - project_name_in_k8
       properties:
         deploy_k8:
           title: deploy to Kuberntes
           type: boolean
         project_name_in_k8:
-          title: deploy to Kuberntes
-          type: boolean
+          title: Name of Deployment
+          type: string
+          description: Name of the Deployment you want to create in kubernetes
   steps:
     - id: log
       name: Debug Logs
