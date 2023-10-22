@@ -167,7 +167,7 @@ spec:
           description: Name of the Deployment you want to create in kubernetes
           maxLength: 100
           pattern: '^[a-z]+(-[a-z]+)*$'
-          
+
   steps:
     - id: log
       name: Debug Logs
@@ -178,6 +178,7 @@ spec:
             {% for component in parameters.uses_components %}
               - ${{ component.component }}
             {% endfor %}
+            ${{ parameters.docker_image_name }}
 
 
     - id: template
