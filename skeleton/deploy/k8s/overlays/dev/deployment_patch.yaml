@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ${{values.project_name}}
+  name: ${{values.project_name_in_k8}}
 spec:
   strategy:
     type: RollingUpdate
@@ -11,15 +11,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ${{values.project_name}}
+      app: ${{values.project_name_in_k8}}
   template:
     metadata:
       annotations:
-        backstage.io/kubernetes-id: ${{values.project_name | dump}}
+        backstage.io/kubernetes-id: ${{values.project_name_in_k8}}
     spec:
       containers:
         - name: my-${{values.project_name}}
-          image: ${{values.docker_username}}/${{values.project_name}}:1
+          image: ${{values.docker_username}}/${{values.docker_image_name}}:1
           env: 
             - name: ASPNETCORE_ENVIRONMENT
               value: "Development"  
