@@ -152,7 +152,7 @@ spec:
           type: string
           description: Passwod for Login, will be stored as secrets
           maxLength: 100
-          pattern: '^[a-z]+(-[a-z]+)*$'
+          pattern: '^[a-z0-9]+(-[a-z0-9]+)*$'
 
     - title: Configure Deployments
       required:
@@ -166,7 +166,7 @@ spec:
           type: string
           description: Name of the Deployment you want to create in kubernetes
           maxLength: 100
-          pattern: '^[a-z0-9]([-a-z0-9]*[a-z0-9])?*$'
+          pattern: '^[a-z0-9]+(-[a-z0-9]+)*$'
 
   steps:
     - id: log
