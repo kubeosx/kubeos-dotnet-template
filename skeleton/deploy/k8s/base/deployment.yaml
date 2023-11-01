@@ -17,9 +17,11 @@ spec:
       annotations:
         backstage.io/kubernetes-id: ${{values.project_name_in_k8}}
         vault.hashicorp.com/agent-inject: 'true'
-        vault.hashicorp.com/role: 'kubeos'
+        vault.hashicorp.com/role: '${{values.project_name_in_k8}}'
         vault.hashicorp.com/agent-inject-secret-config.txt: 'kubeos/dev/${{values.project_name_in_k8}}'
     spec:
+      serviceAccountName: ${{values.project_name_in_k8}}
+      automountServiceAccountToken: true
       volumes:
         # - name: rw-tmp-volume
         #   persistentVolumeClaim:
