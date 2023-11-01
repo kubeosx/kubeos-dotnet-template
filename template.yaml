@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: kubeos-dotnet-template
-  title: ".Net 7 Api in Kubernetes"
+  title: "DotNet 7 Api in Kubernetes"
   description: "A Full Fledged .Net 7 Api built with cloud standard for distributed logging, metrics, tracing. Preconfigured github pipeline update open api spec to build docker image and push it to docker hub, and PR to deploy the image in kubernetes"
   tags:
     - recommended
@@ -166,7 +166,7 @@ spec:
           type: string
           description: Name of the Deployment you want to create in kubernetes
           maxLength: 100
-          pattern: '^[a-z]+(-[a-z]+)*$'
+          pattern: '^[a-z0-9]([-a-z0-9]*[a-z0-9])?*$'
 
   steps:
     - id: log
