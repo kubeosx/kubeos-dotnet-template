@@ -239,6 +239,7 @@ spec:
         url: https://github.com/kubeosx/kubeos-autopr-templates.git
         path:
         targetPath: kubeos/clusters/dev
+        replace: true
         values:
           description: ${{ parameters.description }}
           project_name: ${{ parameters.project_name }}
