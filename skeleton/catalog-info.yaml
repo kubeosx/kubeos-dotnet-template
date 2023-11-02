@@ -11,6 +11,7 @@ metadata:
     backstage.io/kubernetes-id: ${{values.project_name | dump}}
     backstage.io/kubernetes-namespace: ${{values.project_k8_namespace | dump}}
     prometheus.io/alert: all
+    vault.io/secrets-path: 'kubeos/dev/${{values.project_name_in_k8}}'
   tags:
     - dotnet
     - webapi
