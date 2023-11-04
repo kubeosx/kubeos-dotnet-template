@@ -6,3 +6,4 @@ resources:
   - deployment.yaml
   - service.yaml
   - cm-appsettings.yaml
+  - vault-role-policy-sync.yaml
