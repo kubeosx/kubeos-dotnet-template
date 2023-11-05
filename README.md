@@ -9,6 +9,10 @@ Welcome to the .NET 7 Onboarding Template for KubeOS! This template provides a s
 
 Onboarding developers into a KubeOS-enabled cluster can be a complex process involving various resources, configurations, and access controls. This template aims to automate and standardize this process, ensuring that new developers have everything they need to start working on KubeOS projects.
 
+![flow2](https://github.com/kubeosx/kubeos-dotnet-template/assets/22702292/abec1be4-4899-44fa-a5e9-ca0a648fad72)
+
+
+
 ## Key Features
 
 ### Backstage Integration
